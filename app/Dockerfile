@@ -1,7 +1,7 @@
 FROM redmine:3.2.3-passenger
 
-ENV REDMINE_ISSUE_TEMPLATES_VERSION 0.1.2
-ENV CLIPBOARD_IMAGE_PASTE_VERSION 1.10
+ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
+    CLIPBOARD_IMAGE_PASTE_VERSION=1.10
 
 RUN cd plugins && \
     curl -L -O https://github.com/akiko-pusu/redmine_issue_templates/archive/${REDMINE_ISSUE_TEMPLATES_VERSION}.tar.gz && \
