@@ -10,7 +10,7 @@ db:
     - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --no-locale
 # Redmineの設定
 app:
-  image: redmine:3.2.3-passenger
+  build: app
   volumes:
     - /opt/docker/redmine/volumes/app/usr/src/redmine/files:/usr/src/redmine/files
     - /etc/localtime:/etc/localtime:ro
