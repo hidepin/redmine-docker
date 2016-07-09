@@ -10,18 +10,18 @@ redmine-docker
 ------------------------------------------------------------
 1. ディレクトリに移動する。
 
-``` shell
-cd redmine-docker
-```
+  ``` shell
+  cd redmine-docker
+  ```
 
 2. 起動する
 
-``` shell
-docker-compose up -d
-```
+  ``` shell
+  docker-compose up -d
+  ```
 
 3. 起動状態を確認する
 
-``` shell
-docker-compose ps
-```
+  ``` shell
+  docker-compose ps
+  ```
