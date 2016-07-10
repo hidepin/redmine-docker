@@ -2,7 +2,8 @@ FROM redmine:3.2.3-passenger
 
 ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
     CLIPBOARD_IMAGE_PASTE_VERSION=1.10 \
-    REDMINE_CODE_REVIEW_VERSION=0.7.0
+    REDMINE_CODE_REVIEW_VERSION=0.7.0 \
+    REDMINE_BANNER_VERSION=0.1.2
 
 # パッケージの追加インストール
 # - fonts-ipafont-gothic
@@ -23,6 +24,7 @@ RUN sed 's#rmagick_font_path:$#rmagick_font_path: /usr/share/fonts/opentype/ipaf
 #   - clipboard_image_paste
 #   - redmine_github_hook
 #   - sidebar_hide
+#   - redmine_banner
 # - テーマ
 #   - farend_basic
 RUN cd plugins && \
@@ -44,6 +46,11 @@ RUN cd plugins && \
     chown -R redmine:redmine redmine_code_review && \
     git clone --depth 1 https://github.com/bdemirkir/sidebar_hide.git && \
     chown -R redmine:redmine sidebar_hide && \
+    curl -L -O https://github.com/akiko-pusu/redmine_banner/archive/${REDMINE_BANNER_VERSION}.tar.gz && \
+    tar xvf ${REDMINE_BANNER_VERSION}.tar.gz && \
+    mv redmine_banner-${REDMINE_BANNER_VERSION} redmine_banner && \
+    rm ${REDMINE_BANNER_VERSION}.tar.gz && \
+    chown -R redmine:redmine redmine_banner && \
     sed -i.org 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
     cd ../public/themes && \
     git clone --depth 1 https://github.com/farend/redmine_theme_farend_basic.git farend_basic && \

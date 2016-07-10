@@ -24,6 +24,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - [redmine_github_hook](https://github.com/koppen/redmine_github_hook)
       - [redmine_code_review](http://www.r-labs.org/projects/r-labs/wiki/Code_Review)
       - [sidebar_hide](https://github.com/bdemirkir/sidebar_hide)
+      - [redmine_banner](https://github.com/akiko-pusu/redmine_banner)
 
 - db
   - PostgreSQL追加設定
@@ -98,6 +99,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |:---------------------------------------------------|:-------------------|:--------|
     |デフォルトで新しいプロジェクトは公開にする          |                    |(uncheck)|
     |プロジェクトにおいてデフォルトで有効となるモジュール|ファイル            |(uncheck)|
+    |                                                    |バナー              |(check)  |
     |                                                    |コードレビュー      |(check)  |
     |                                                    |チケットテンプレート|(check)  |
     |プロジェクトにおいてデフォルトで有効となるトラッカー|バグ                |(check)  |
