@@ -22,6 +22,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - [redmine_issue_templates](https://github.com/akiko-pusu/redmine_issue_templates)
       - [clipboard_image_paste](https://github.com/peclik/clipboard_image_paste)
       - [redmine_github_hook](https://github.com/koppen/redmine_github_hook)
+      - [redmine_code_review](http://www.r-labs.org/projects/r-labs/wiki/Code_Review)
 
 - db
   - PostgreSQL追加設定
@@ -96,6 +97,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |:---------------------------------------------------|:-------------------|:--------|
     |デフォルトで新しいプロジェクトは公開にする          |                    |(uncheck)|
     |プロジェクトにおいてデフォルトで有効となるモジュール|ファイル            |(uncheck)|
+    |                                                    |コードレビュー      |(check)  |
     |                                                    |チケットテンプレート|(check)  |
     |プロジェクトにおいてデフォルトで有効となるトラッカー|バグ                |(check)  |
     |                                                    |機能                |(check)  |

@@ -1,11 +1,13 @@
 FROM redmine:3.2.3-passenger
 
 ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
-    CLIPBOARD_IMAGE_PASTE_VERSION=1.10
+    CLIPBOARD_IMAGE_PASTE_VERSION=1.10 \
+    REDMINE_CODE_REVIEW_VERSION=0.7.0
 
 # パッケージの追加インストール
 # - fonts-ipafont-gothic
 RUN buildDeps=' \
+                unzip \
                 fonts-ipafont-gothic \
     ' \
     && set -x \
@@ -35,6 +37,10 @@ RUN cd plugins && \
     chown -R redmine:redmine clipboard_image_paste && \
     git clone --depth 1 https://github.com/koppen/redmine_github_hook.git redmine_github_hook && \
     chown -R redmine:redmine redmine_github_hook && \
+    curl -L -O https://bitbucket.org/haru_iida/redmine_code_review/downloads/redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
+    unzip redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
+    rm redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
+    chown -R redmine:redmine redmine_code_review && \
     sed -i.org 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
     cd ../public/themes && \
     git clone --depth 1 https://github.com/farend/redmine_theme_farend_basic.git farend_basic && \
