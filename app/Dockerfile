@@ -3,6 +3,18 @@ FROM redmine:3.2.3-passenger
 ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
     CLIPBOARD_IMAGE_PASTE_VERSION=1.10
 
+# パッケージの追加インストール
+# - fonts-ipafont-gothic
+RUN buildDeps=' \
+                fonts-ipafont-gothic \
+    ' \
+    && set -x \
+    && apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/*
+
+# 設定の追加
+# - 日本語フォント設定
+RUN sed 's#rmagick_font_path:$#rmagick_font_path: /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf#' config/configuration.yml.example > config/configuration.yml
+
 # プラグインとテーマを追加
 # - プラグイン
 #   - redmine_issue_templates
