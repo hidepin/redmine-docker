@@ -21,6 +21,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     - redmine plugin
       - [redmine_issue_templates](https://github.com/akiko-pusu/redmine_issue_templates)
       - [clipboard_image_paste](https://github.com/peclik/clipboard_image_paste)
+      - [redmine_github_hook](https://github.com/koppen/redmine_github_hook)
 
 - db
   - PostgreSQL追加設定
@@ -110,3 +111,39 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |                            |プライベート|(select)(一番に下)        |
     |                            |予定工数    |(check)                   |
     |                            |作業時間    |(check)                   |
+
+gitbucket連携
+------------------------------------------------------------
+本設定はgitbucketのリポジトリを連携する毎に実施する。
+cloneは、redmine dockerのホストで実施すること
+
+1. 連携するリポジトリをホストOS上でredmineのvolumesの下にrootでbase cloneする
+   ```shell
+   cd /opt/docker/redmine/volumes/app/opt/redmine/repos
+   git clone --bare <連携するリポジトリのhttp://〜.gitまでのURL>
+   chmod -R 777 <cloneしたリポジトリ>(.gitも入力)
+   ```
+
+2. プロジェクトとリポジトリを連携させる
+   リポジトリ設定が可能なアカウントでredmineにログインする
+   左上の「プロジェクト」を押下し、設定対象のプロジェクトを選択する
+   「設定」タブ->「リポジトリ」->「新しいリポジトリ」を押下する
+   下記のように変更し「保存」を押下する
+
+    |設定                                          |設定値                                              |
+    |:---------------------------------------------|:---------------------------------------------------|
+    |バージョン管理システム                        |Git                                                 |
+    |識別子                                        |(任意)                                              |
+    |リポジトリのパス                              |/opt/redmine/repos/<cloneしたリポジトリ>(.gitも入力)|
+    |ファイルとディレクトリの最新コミットを表示する|(check)                                             |
+
+3. gitbucketにWebHookを設定する
+  1. gitbucketのリポジトリで、「Settings」を押下し、「Service Hooks」タブを選択する
+
+  2. 「Add webhook」を押下する。
+
+  3. 下記を設定し、「Add webhook」を押下する
+
+            |設定       |設定値                                                                                   |
+            |:----------|:----------------------------------------------------------------------------------------|
+            |Payload URL|http://<Redmineのサイト>/github_hook?project_id=<プロジェクトのID>&repository_id=<識別子>|

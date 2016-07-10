@@ -13,6 +13,7 @@ app:
   build: app
   volumes:
     - /opt/docker/redmine/volumes/app/usr/src/redmine/files:/usr/src/redmine/files
+    - /opt/docker/redmine/volumes/app/opt/redmine/repos:/opt/redmine/repos
     - /etc/localtime:/etc/localtime:ro
   ports:
     - "3000:3000"
