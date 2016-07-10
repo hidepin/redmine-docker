@@ -16,6 +16,8 @@ redmineのdocker official imgをベースに下記を追加を設定する
   - redmine追加設定
     - 日本語設定パス
       - config/configuration.yml: rmagick_font_path: /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf
+    - redmine_theme
+      - farend_basic
     - redmine plugin
       - [redmine_issue_templates](https://github.com/akiko-pusu/redmine_issue_templates)
       - [clipboard_image_paste](https://github.com/peclik/clipboard_image_paste)
