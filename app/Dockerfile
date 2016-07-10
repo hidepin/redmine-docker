@@ -22,6 +22,7 @@ RUN sed 's#rmagick_font_path:$#rmagick_font_path: /usr/share/fonts/opentype/ipaf
 #   - redmine_issue_templates
 #   - clipboard_image_paste
 #   - redmine_github_hook
+#   - sidebar_hide
 # - テーマ
 #   - farend_basic
 RUN cd plugins && \
@@ -35,12 +36,14 @@ RUN cd plugins && \
     rm v${CLIPBOARD_IMAGE_PASTE_VERSION}.tar.gz && \
     mv clipboard_image_paste-${CLIPBOARD_IMAGE_PASTE_VERSION} clipboard_image_paste && \
     chown -R redmine:redmine clipboard_image_paste && \
-    git clone --depth 1 https://github.com/koppen/redmine_github_hook.git redmine_github_hook && \
+    git clone --depth 1 https://github.com/koppen/redmine_github_hook.git && \
     chown -R redmine:redmine redmine_github_hook && \
     curl -L -O https://bitbucket.org/haru_iida/redmine_code_review/downloads/redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
     unzip redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
     rm redmine_code_review-${REDMINE_CODE_REVIEW_VERSION}.zip && \
     chown -R redmine:redmine redmine_code_review && \
+    git clone --depth 1 https://github.com/bdemirkir/sidebar_hide.git && \
+    chown -R redmine:redmine sidebar_hide && \
     sed -i.org 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
     cd ../public/themes && \
     git clone --depth 1 https://github.com/farend/redmine_theme_farend_basic.git farend_basic && \
