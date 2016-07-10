@@ -26,6 +26,7 @@ RUN sed 's#rmagick_font_path:$#rmagick_font_path: /usr/share/fonts/opentype/ipaf
 #   - sidebar_hide
 #   - redmine_banner
 #   - redmine_incr_code_search
+#   - redmine_emoji
 # - テーマ
 #   - farend_basic
 RUN cd plugins && \
@@ -54,6 +55,8 @@ RUN cd plugins && \
     chown -R redmine:redmine redmine_banner && \
     git clone --depth 1 https://github.com/suer/redmine_incr_code_search.git && \
     chown -R redmine:redmine redmine_incr_code_search && \
+    git clone --depth 1 https://github.com/suer/redmine_emoji.git && \
+    chown -R redmine:redmine redmine_emoji && \
     sed -i.org 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
     cd ../public/themes && \
     git clone --depth 1 https://github.com/farend/redmine_theme_farend_basic.git farend_basic && \

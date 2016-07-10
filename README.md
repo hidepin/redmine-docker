@@ -26,6 +26,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - [sidebar_hide](https://github.com/bdemirkir/sidebar_hide)
       - [redmine_banner](https://github.com/akiko-pusu/redmine_banner)
       - [redmine_incr_code_search](https://github.com/suer/redmine_incr_code_search)
+      - [redmine_emoji](https://github.com/suer/redmine_emoji)
 
 - db
   - PostgreSQL追加設定
