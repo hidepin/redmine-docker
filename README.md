@@ -6,6 +6,24 @@ redmine-docker
 - docker
 - docker-compose
 
+設定
+------------------------------------------------------------
+redmineのdocker official imgをベースに下記を追加を設定する
+
+- app
+  - OS追加設定
+    - fonts-ipafont-gothic
+  - redmine追加設定
+    - 日本語設定パス
+      - config/configuration.yml: rmagick_font_path: /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf
+    - redmine plugin
+      - [redmine_issue_templates](https://github.com/akiko-pusu/redmine_issue_templates)
+      - [clipboard_image_paste](https://github.com/peclik/clipboard_image_paste)
+
+- db
+  - PostgreSQL追加設定
+    initdb設定: --encoding=UTF-8 --no-locale
+
 起動方法
 ------------------------------------------------------------
 
