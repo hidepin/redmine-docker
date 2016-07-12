@@ -275,6 +275,8 @@ cloneは、redmine dockerのホストで実施すること
 
 1. 連携するリポジトリをホストOS上でredmineのvolumesの下にrootでbase cloneする
 
+   ※ 認証が必要な場合は、**http://\<ユーザ名\>\:\<パスワード\>@\<ホスト名\>/...**の形式で認証情報を渡すこと
+
    ```shell
    cd /opt/docker/redmine/volumes/app/opt/redmine/repos
    git clone --bare <連携するリポジトリのhttp://〜.gitまでのURL>
@@ -305,4 +307,4 @@ cloneは、redmine dockerのホストで実施すること
 
       |設定       |設定値                                                                                   |
       |:----------|:----------------------------------------------------------------------------------------|
-      |Payload URL|http://<Redmineのサイト>/github_hook?project_id=<プロジェクトのID>&repository_id=<識別子>|
+      |Payload URL|http://\<Redmineのサイト\>/github_hook?project_id=<プロジェクトのID>&repository_id=<識別子>|
