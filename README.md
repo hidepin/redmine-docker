@@ -308,3 +308,32 @@ cloneは、redmine dockerのホストで実施すること
       |設定       |設定値                                                                                   |
       |:----------|:----------------------------------------------------------------------------------------|
       |Payload URL|http://\<Redmineのサイト\>/github_hook?project_id=<プロジェクトのID>&repository_id=<識別子>|
+
+Offline環境
+------------------------------------------------------------
+Offline環境ではpassengerがインターネット接続しようとして起動に失敗するため、
+下記設定をdocker-compose.ymlのappに追加すること
+
+``` yaml
+(追加設定)
+  environment:
+    - PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
+    - PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+```
+
+``` yaml
+# Redmineの設定
+app:
+  build: app
+  volumes:
+    - /opt/docker/redmine/volumes/app/usr/src/redmine/files:/usr/src/redmine/files
+    - /opt/docker/redmine/volumes/app/opt/redmine/repos:/opt/redmine/repos
+    - /etc/localtime:/etc/localtime:ro
+  environment:
+    - PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
+    - PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+  ports:
+    - "3000:3000"
+  links:
+    - db:postgres
+```
