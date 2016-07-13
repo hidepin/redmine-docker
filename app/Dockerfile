@@ -57,7 +57,8 @@ RUN cd plugins && \
     chown -R redmine:redmine redmine_incr_code_search && \
     git clone --depth 1 https://github.com/suer/redmine_emoji.git && \
     chown -R redmine:redmine redmine_emoji && \
-    sed -i.org 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
+    sed -i.org1 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
+    sed -i.org2 's#\(bundle install.*$\)#if [ -z "$REDMINE_NO_DB_MIGRATE" ]; then \1 ;fi#' /docker-entrypoint.sh && \
     cd ../public/themes && \
     git clone --depth 1 https://github.com/farend/redmine_theme_farend_basic.git farend_basic && \
     chown -R redmine:redmine farend_basic
