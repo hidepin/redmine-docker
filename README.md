@@ -27,6 +27,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - [redmine_banner](https://github.com/akiko-pusu/redmine_banner)
       - [redmine_incr_code_search](https://github.com/suer/redmine_incr_code_search)
       - [redmine_emoji](https://github.com/suer/redmine_emoji)
+      - [redmine_mattermost](https://github.com/altsol/redmine_mattermost)
 
 - db
   - PostgreSQL追加設定
@@ -308,6 +309,51 @@ cloneは、redmine dockerのホストで実施すること
       |設定       |設定値                                                                                   |
       |:----------|:----------------------------------------------------------------------------------------|
       |Payload URL|http://\<Redmineのサイト\>/github_hook?project_id=<プロジェクトのID>&repository_id=<識別子>|
+
+mattermost連携
+------------------------------------------------------------
+本設定はredmineとmattermostを連携させる。
+
+- mattermostでWebHookを有効化する(システム管理者)
+
+  1. 左上のメニューから「システムコンソール」を押下する
+
+  2. 「設定」->「統合機能」->「ウェブフックとコマンド」を押下し、下記を設定する
+
+    |メニュー                                                      |設定値|
+    |:-------------------------------------------------------------|:----|
+    |外向きのウェブフックを有効化する                              |有効 |
+    |外向きのウェブフックを有効化する                              |有効 |
+    |ウェブフックまたはスラッシュコマンドでのユーザー名を上書きする|有効 |
+
+- mattermostでredmineからmattermostへのアクセス設定(チーム管理者/システム管理者)
+
+  1. 左上のメニューから「統合機能」を押下する
+
+  2. 「内向きのウェブフック」->「内向きのウェブフックを追加する」を押下する
+
+  3. 下記を設定し、「保存する」を押下する
+
+    |メニュー    |設定値                           |
+    |:-----------|:--------------------------------|
+    |Display Name|(任意)                           |
+    |説明        |(任意)                           |
+    |チャネル    |(botを動作させたいチャネルを指定)|
+
+- redmineでmattermostの設定を行う。
+
+  1. redmine pluginの設定を行う
+
+     左上の「管理」を押下し、「プラグイン」を押下する。
+     「Redmine Mattermost」の「設定」を押下して、下記のように変更し「適用」を押下する。
+
+      |設定               |設定値                             |
+      |:------------------|:----------------------------------|
+      |Mattermost URL     |(Mattermost内向きのWebHookの設定値)|
+      |Mattermost Channel |(Mattermost内向きのWebHookの設定値)|
+      |Display Watchers?  |Yes                                |
+      |Post Issue Updates?|(有効)                             |
+      |Post Wiki Updates? |(有効)                             |
 
 Offline環境
 ------------------------------------------------------------
