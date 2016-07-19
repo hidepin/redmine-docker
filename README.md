@@ -365,6 +365,7 @@ Offline環境ではpassengerがインターネット接続しようとして起�
   environment:
     - PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
     - PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+    - REDMINE_NO_DB_MIGRATE=true
 ```
 
 ``` yaml
@@ -378,6 +379,7 @@ app:
   environment:
     - PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
     - PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+    - REDMINE_NO_DB_MIGRATE=true
   ports:
     - "3000:3000"
   links:
