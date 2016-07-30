@@ -59,6 +59,7 @@ RUN cd plugins && \
     git clone --depth 1 https://github.com/suer/redmine_emoji.git && \
     chown -R redmine:redmine redmine_emoji && \
     git clone --depth 1 https://github.com/altsol/redmine_mattermost.git && \
+    sed -i.org 's/\(.*client.ssl_config.ssl_version = "SSLv23"\)/\1\n\t\t\tclient.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE/' /usr/src/redmine/plugins/redmine_mattermost/lib/redmine_mattermost/listener.rb && \
     chown -R redmine:redmine  redmine_mattermost && \
     sed -i.org1 's/gosu redmine rake db:migrate/gosu redmine rake db:migrate redmine:plugins:migrate RAILS_ENV=production/' /docker-entrypoint.sh && \
     sed -i.org2 's#\(bundle install.*$\)#if [ -z "$REDMINE_NO_DB_MIGRATE" ]; then \1 ;fi#' /docker-entrypoint.sh && \
