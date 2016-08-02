@@ -201,10 +201,11 @@ redmineのdocker official imgをベースに下記を追加を設定する
    左上の「管理」を押下し、「View customize」を押下する。
    「New view cutomize」を押下して、下記のように変更し「保存」を押下する。
 
-    - Path pattern: /issues/new$|/issues/[0-9]+/copy$
-    - Type: JavaScript
-    - Code:
-    ```javascript
+    - チケット作成時(コピー時含む)自動でチケット担当者を作成者とし、期日を7日後に設定
+      - Path pattern: /issues/new$|/issues/[0-9]+/copy$
+      - Type: JavaScript
+      - Code:
+      ```javascript
 $(function() {
   today = new Date();
   month = today.getMonth() + 1
@@ -222,12 +223,13 @@ $(function() {
   }
   setDefalutValue();
 });
-    ```
+      ```
 
-    - Path pattern: /issues/*
-    - Type: StyleSheet
-    - Code:
-    ```css
+    - ステータス、担当者、期日欄の背景を黄色にする
+      - Path pattern: /issues/*
+      - Type: StyleSheet
+      - Code:
+      ```css
 #issue_status_id {
   background-color: #ffffcc;
 }
@@ -239,7 +241,7 @@ $(function() {
 #issue_due_date {
   background-color: #ffffcc;
 }
-    ```
+      ```
 
 9. PJ管理者を追加する
 
