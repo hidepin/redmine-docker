@@ -28,6 +28,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - [redmine_incr_code_search](https://github.com/suer/redmine_incr_code_search)
       - [redmine_emoji](https://github.com/suer/redmine_emoji)
       - [redmine_mattermost](https://github.com/altsol/redmine_mattermost)
+      - [redmine-view-customize](https://github.com/onozaty/redmine-view-customize)
 
 - db
   - PostgreSQL追加設定
@@ -195,7 +196,52 @@ redmineのdocker official imgをベースに下記を追加を設定する
 - エラーログ、メッセージなどを記述
     ```
 
-8. PJ管理者を追加する
+8. View customizeを登録する
+
+   左上の「管理」を押下し、「View customize」を押下する。
+   「New view cutomize」を押下して、下記のように変更し「保存」を押下する。
+
+    - Path pattern: /issues/new$|/issues/[0-9]+/copy$
+    - Type: JavaScript
+    - Code:
+    ```javascript
+$(function() {
+  today = new Date();
+  month = today.getMonth() + 1
+  if ( month < 10 ) {
+    month = '0' + month
+  }
+  day = today.getDate() + 7
+  if ( day < 10 ) {
+    day = '0' + day
+  }
+
+  var setDefalutValue = function() {
+    $('#issue_assigned_to_id').val('1');
+    $('#issue_due_date').val(today.getFullYear() + '-' + month + '-' + day);
+  }
+  setDefalutValue();
+});
+    ```
+
+    - Path pattern: /issues/*
+    - Type: StyleSheet
+    - Code:
+    ```css
+#issue_status_id {
+  background-color: #ffffcc;
+}
+
+#issue_assigned_to_id {
+  background-color: #ffffcc;
+}
+
+#issue_due_date {
+  background-color: #ffffcc;
+}
+    ```
+
+9. PJ管理者を追加する
 
    左上の「管理」を押下し、「ロールと権限」を押下する。
    「管理者」の「コピー」を押下して、下記のように変更し「保存」を押下する。
@@ -212,7 +258,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |            |                  |プロジェクトの終了/再開               |(uncheck)    |
     |            |                  |モジュールの選択                      |(uncheck)    |
 
-9. 全般設定を変更する
+10. 全般設定を変更する
 
    左上の「管理」を押下し、「設定」->「全般」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -221,7 +267,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |:---------------------------------|:---------------|
     |テキストの書式                      |Markdown    |
 
-10. 表示設定を変更する
+11. 表示設定を変更する
 
    左上の「管理」を押下し、「設定」->「表示」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -233,7 +279,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |ユーザー名の表示形式              |Admin Redmine   |
     |添付ファイルのサムネイル画像を表示|(check)         |
 
-11. 認証設定を変更する
+12. 認証設定を変更する
 
    左上の「管理」を押下し、「設定」->「認証」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -244,7 +290,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |ユーザによるアカウント削除を許可|(uncheck)|
     |パスワードの再発行              |(uncheck)|
 
-12. プロジェクト設定を変更する
+13. プロジェクト設定を変更する
 
    左上の「管理」を押下し、「設定」->「プロジェクト」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -263,7 +309,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |プロジェクトにおいてデフォルトで有効となるトラッカー|タスク              |(check)  |
     |                                                    |調査                |(check)  |
 
-13. チケットトラッキング設定を変更する
+14. チケットトラッキング設定を変更する
 
    左上の「管理」を押下し、「設定」->「チケットトラッキング」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -276,7 +322,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |                            |予定工数    |(check)                   |
     |                            |作業時間    |(check)                   |
 
-14. ファイル設定を変更する
+15. ファイル設定を変更する
 
    左上の「管理」を押下し、「設定」->「ファイル」タブを押下する。
    下記のように変更し「保存」を押下する
@@ -285,7 +331,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
     |:-----------------------------------------|:-----------------|
     |添付ファイルとリポジトリのエンコーディング|UTF-8,CP932,EUC-JP|
 
-15. リポジトリ設定を変更する
+16. リポジトリ設定を変更する
 
    左上の「管理」を押下し、「設定」->「リポジトリ」タブを押下する。
    下記のように変更し「保存」を押下する
