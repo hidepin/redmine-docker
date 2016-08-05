@@ -218,7 +218,7 @@ $(function() {
   }
 
   var setDefalutValue = function() {
-    $('#issue_assigned_to_id').val('1');
+    $('#issue_assigned_to_id option:contains("自分")').attr('selected', true);
     $('#issue_due_date').val(today.getFullYear() + '-' + month + '-' + day);
   }
   setDefalutValue();
