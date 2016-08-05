@@ -206,23 +206,23 @@ redmineのdocker official imgをベースに下記を追加を設定する
       - Type: JavaScript
       - Code:
       ```javascript
-$(function() {
-  today = new Date();
-  month = today.getMonth() + 1
-  if ( month < 10 ) {
-    month = '0' + month
-  }
-  day = today.getDate() + 7
-  if ( day < 10 ) {
-    day = '0' + day
-  }
+      $(function() {
+        today = new Date();
+        month = today.getMonth() + 1
+        if ( month < 10 ) {
+          month = '0' + month
+        }
+        day = today.getDate() + 7
+        if ( day < 10 ) {
+          day = '0' + day
+        }
 
-  var setDefalutValue = function() {
-    $('#issue_assigned_to_id option:contains("自分")').attr('selected', true);
-    $('#issue_due_date').val(today.getFullYear() + '-' + month + '-' + day);
-  }
-  setDefalutValue();
-});
+        var setDefalutValue = function() {
+          $('#issue_assigned_to_id option:contains("自分")').attr('selected', true);
+          $('#issue_due_date').val(today.getFullYear() + '-' + month + '-' + day);
+        }
+        setDefalutValue();
+      });
       ```
 
     - ステータス、担当者、期日欄の背景を黄色にする
@@ -230,17 +230,17 @@ $(function() {
       - Type: StyleSheet
       - Code:
       ```css
-#issue_status_id {
-  background-color: #ffffcc;
-}
+      #issue_status_id {
+        background-color: #ffffcc;
+      }
 
-#issue_assigned_to_id {
-  background-color: #ffffcc;
-}
+      #issue_assigned_to_id {
+        background-color: #ffffcc;
+      }
 
-#issue_due_date {
-  background-color: #ffffcc;
-}
+      #issue_due_date {
+        background-color: #ffffcc;
+      }
       ```
 
 9. PJ管理者を追加する
