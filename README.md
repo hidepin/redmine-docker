@@ -208,13 +208,15 @@ redmineのdocker official imgをベースに下記を追加を設定する
       ```javascript
       $(function() {
         today = new Date();
-        month = today.getMonth() + 1
+        today.setDate(today.getDate() + 7);
+        
+        month = today.getMonth() + 1;
         if ( month < 10 ) {
-          month = '0' + month
+          month = '0' + month;
         }
-        day = today.getDate() + 7
+        day = today.getDate();
         if ( day < 10 ) {
-          day = '0' + day
+          day = '0' + day;
         }
 
         var setDefalutValue = function() {
