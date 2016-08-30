@@ -209,7 +209,7 @@ redmineのdocker official imgをベースに下記を追加を設定する
       $(function() {
         today = new Date();
         today.setDate(today.getDate() + 7);
-        
+
         month = today.getMonth() + 1;
         if ( month < 10 ) {
           month = '0' + month;
