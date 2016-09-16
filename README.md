@@ -395,9 +395,11 @@ Subversion連携
    左上の「管理」を押下し、「設定」->「リポジトリ」タブを押下する。
    下記のように変更し「保存」を押下する
 
-    |設定                |設定値 |
-    |:-------------------|:------|
-    |コミット自動取得する|(check)|
+    |設定                                     |設定値                      |
+    |:----------------------------------------|:---------------------------|
+    |コミット自動取得する                     |(uncheck)                   |
+    |リポジトリ管理用のWebサービスを有効にする|(check)                     |
+    |APIキー                                  |(「キーの生成」でキーの生成)|
 
 2. subversion側でredmineからのアクセス用ユーザを作成する
 
@@ -417,6 +419,22 @@ Subversion連携
     |パスワード            |(専用ユーザパスワード)                              |
 
 4. subversionのrepoにhookを設定する
+
+   ```
+   cd $REPOS/hooks
+   touch post-commit
+   chmod +x post-commit
+   vi post-commit
+   ```
+   
+   (post-commitの中身)
+   ```
+   #!/bin/sh
+   
+   REPOS="$1"
+   REV="$2"
+   /usr/bin/wget -q -O /dev/null http://(redmineサーバ):port/sys/fetch_changesets?key=(2で生成したキー)
+   ```
 
 mattermost連携
 ------------------------------------------------------------
