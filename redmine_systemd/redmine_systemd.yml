@@ -4,8 +4,8 @@
   vars:
 ###    service_group: sample.
   tasks:
-    - name: Add Redmine DB Service
-      template: src=redmine.db.service.j2 dest=/etc/systemd/system/{{ service_group | default('') }}redmine.db.service
-
-    - name: Add Redmine APP Service
-      template: src=redmine.app.service.j2 dest=/etc/systemd/system/{{ service_group | default('') }}redmine.app.service
+    - name: Set Redmine Systemd Service
+      template: src={{ item }}.j2 dest=/etc/systemd/system/{{ service_group | default('') }}{{ item }}
+      with_items:
+        - redmine.db.service
+        - redmine.app.service
