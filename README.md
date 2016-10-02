@@ -34,6 +34,19 @@ redmineのdocker official imgをベースに下記を追加を設定する
   - PostgreSQL追加設定
     initdb設定: --encoding=UTF-8 --no-locale
 
+systemdによる自動起動設定
+------------------------------------------------------------
+host OSにsystemdの自動起動設定を行う
+(ansibleのdocker imageが必要)
+
+1. host OSにログインする
+
+2. dockerからansibleの設定を行う
+
+  ``` shell
+  docker run -it -v $(pwd)/redmine_systemd:/opt/ansible/ansible/redmine_systemd --rm=true ansible/centos7-ansible ansible-playbook -i "(host OSのIPアドレス)," -k redmine_systemd/redmine_systemd.yml
+  ```
+
 起動方法
 ------------------------------------------------------------
 
@@ -426,11 +439,11 @@ Subversion連携
    chmod +x post-commit
    vi post-commit
    ```
-   
+
    (post-commitの中身)
    ```
    #!/bin/sh
-   
+
    REPOS="$1"
    REV="$2"
    /usr/bin/wget -q -O /dev/null http://(redmineサーバ):port/sys/fetch_changesets?key=(2で生成したキー)

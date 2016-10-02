@@ -1,0 +1,14 @@
+[Unit]
+Description=DB Container for redmine
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/docker start -a redminedocker_db_1
+ExecStop=/usr/bin/docker stop redminedocker_db_1
+Environment="DOCKER_HOST=tcp://127.0.0.1:4243"
+
+[Install]
+WantedBy=multi-user.target
+
