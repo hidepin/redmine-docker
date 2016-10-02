@@ -1,0 +1,17 @@
+- hosts: all
+  remote_user: root
+  connection: paramiko
+  vars:
+###    service_group: sample.
+  tasks:
+    - name: Set Redmine Systemd Service
+      template: src={{ item }}.j2 dest=/etc/systemd/system/{{ service_group | default('') }}{{ item }}
+      with_items:
+        - redmine.db.service
+        - redmine.app.service
+
+    - name: Enable Redmine Systemd Service
+      systemd: name={{ service_group | default('') }}{{ item }} enabled=yes state=started daemon_reload=yes
+      with_items:
+        - redmine.db.service
+        - redmine.app.service
