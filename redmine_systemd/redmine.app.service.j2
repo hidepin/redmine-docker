@@ -2,8 +2,8 @@
 Description=APP Container for redmine
 After=docker.service
 Requires=docker.service
-After={{ service_group }}redmine.db.service
-Requires={{ service_group }}redmine.db.service
+After={{ service_group | default('') }}redmine.db.service
+Requires={{ service_group | default('') }}redmine.db.service
 
 [Service]
 TimeoutStartSec=0

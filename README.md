@@ -41,6 +41,18 @@ host OSにsystemdの自動起動設定を行う
 
 1. host OSにログインする
 
+2. redmine_systemd/redmine_systemd.ymlのservice_groupを設定する
+
+  ``` shell
+  vi redmine_systemd/redmine_systemd.yml
+  ```
+
+  下記設定を編集する。
+
+  ```
+  service_group: sample.
+  ```
+
 2. dockerからansibleの設定を行う
 
   ``` shell
