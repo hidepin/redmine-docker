@@ -1,5 +1,5 @@
 [Unit]
-Description=APP Container for redmine
+Description=APP Container for Redmine
 After=docker.service
 Requires=docker.service
 After={{ service_group | default('') }}redmine.db.service
