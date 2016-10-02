@@ -9,3 +9,9 @@
       with_items:
         - redmine.db.service
         - redmine.app.service
+
+    - name: Enable Redmine Systemd Service
+      systemd: name={{ service_group | default('') }}{{ item }} enabled=yes state=started daemon_reload=yes
+      with_items:
+        - redmine.db.service
+        - redmine.app.service
