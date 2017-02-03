@@ -1,14 +1,14 @@
 [Unit]
 Description=APP Container for Redmine
-After=docker.service
 Requires=docker.service
-After={{ service_group | default('') }}redmine.db.service
-Requires={{ service_group | default('') }}redmine.db.service
+After=docker.service
 
 [Service]
+Type=simple
 TimeoutStartSec=0
-ExecStart=/usr/bin/docker start -a redminedocker_app_1
-ExecStop=/usr/bin/docker stop redminedocker_app_1
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose stop
+WorkingDirectory=/opt/docker/redmine/redmine-docker
 Environment="DOCKER_HOST=tcp://127.0.0.1:2376"
 
 [Install]
