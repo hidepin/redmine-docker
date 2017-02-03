@@ -7,8 +7,6 @@ services:
     volumes:
       - /opt/docker/redmine/volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
-    networks:
-      - redmine_net
     environment:
       - POSTGRES_PASSWORD=secret
       - POSTGRES_USER=redmine
@@ -16,20 +14,10 @@ services:
 
   # Redmineの設定
   app:
-    build:
-      context: app
-      args:
-        http_proxy:
-        https_proxy:
+    build: app
     volumes:
       - /opt/docker/redmine/volumes/app/usr/src/redmine/files:/usr/src/redmine/files
       - /opt/docker/redmine/volumes/app/opt/redmine/repos:/opt/redmine/repos
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "3000:3000"
-    networks:
-      - redmine_net
-
-networks:
-  redmine_net:
-    driver: bridge
+      - "80:3000"
