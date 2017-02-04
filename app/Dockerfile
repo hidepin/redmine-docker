@@ -1,5 +1,7 @@
 FROM redmine:3.2.3-passenger
 
+LABEL maintainer "Hidetoshi Imai <hidepin@gmail.com>"
+
 ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
     CLIPBOARD_IMAGE_PASTE_VERSION=1.10 \
     REDMINE_CODE_REVIEW_VERSION=0.7.0 \
