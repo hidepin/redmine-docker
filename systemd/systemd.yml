@@ -1,0 +1,16 @@
+- hosts: all
+
+  vars:
+    service: redmine.service
+
+  tasks:
+    - name: set redmine systemd service
+      template: src="{{ service }}.j2" dest="/etc/systemd/system/{{ service }}"
+      notify: redmine restart
+
+    - name: enable redmine systemd service
+      service: name="{{ service }}" enabled=yes state=started daemon_reload=yes
+
+  handlers:
+    - name: redmine restart
+      service: name=redmine state=restarted
