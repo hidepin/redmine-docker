@@ -1,4 +1,4 @@
-FROM redmine:3.2.3-passenger
+FROM redmine:3.2.5-passenger
 
 LABEL maintainer "Hidetoshi Imai <hidepin@gmail.com>"
 
