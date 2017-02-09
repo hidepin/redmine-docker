@@ -2,7 +2,7 @@ FROM redmine:3.2.5-passenger
 
 LABEL maintainer "Hidetoshi Imai <hidepin@gmail.com>"
 
-ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.2 \
+ENV REDMINE_ISSUE_TEMPLATES_VERSION=0.1.3 \
     CLIPBOARD_IMAGE_PASTE_VERSION=1.10 \
     REDMINE_CODE_REVIEW_VERSION=0.7.0 \
     REDMINE_BANNER_VERSION=0.1.2
@@ -24,6 +24,7 @@ RUN sed 's#rmagick_font_path:$#rmagick_font_path: /usr/share/fonts/opentype/ipaf
 # - プラグイン
 #   - redmine_issue_templates
 #   - clipboard_image_paste
+#   - redmine_code_review
 #   - redmine_github_hook
 #   - sidebar_hide
 #   - redmine_banner
